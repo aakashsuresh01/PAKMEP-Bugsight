@@ -1,0 +1,59 @@
+#!/bin/bash
+
+banner() {
+cat << "EOF"
+██████╗  █████╗ ██╗  ██╗███╗   ███╗███████╗██████╗
+██╔══██╗██╔══██╗██║ ██╔╝████╗ ████║██╔════╝██╔══██╗
+██████╔╝███████║█████╔╝ ██╔████╔██║█████╗  ██████╔╝
+██╔═══╝ ██╔══██║██╔═██╗ ██║╚██╔╝██║██╔══╝  ██╔═══╝
+██║     ██║  ██║██║  ██╗██║ ╚═╝ ██║███████╗██║
+╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝
+👁  BugSight by KyberPhilos
+EOF
+}
+
+# Check for argument
+if [ "$#" -ne 1 ]; then
+    echo "[!] Usage: $0 <target-domain>"
+    exit 1
+fi
+
+TARGET=$1
+
+banner
+echo "[*] 🕵 Starting BugSight Recon on $TARGET ..."
+
+# Step 1: Subdomain Enumeration
+echo "[*] Enumerating subdomains for $TARGET ..."
+subfinder -d $TARGET -silent > subdomains.txt
+
+# Step 2: Resolve subdomains
+echo "[*] Resolving subdomains to IPs..."
+dnsx -silent -a -l subdomains.txt -o resolved.txt
+
+# Step 3: Checking live subdomains
+echo "[*] Checking live subdomains..."
+httpx -silent -l resolved.txt -o live.txt
+
+# Step 4: Port scanning
+echo "[*] Scanning open ports..."
+naabu -iL live.txt -silent -o ports.txt
+
+# Step 5: JS/config download (basic placeholder)
+echo "[*] Downloading JS/config files from live subdomains..."
+mkdir -p js_files
+while read url; do
+    domain=$(echo $url | awk -F/ '{print $3}')
+    wget -q --show-progress --no-check-certificate -r -l1 -H -nd -A js,json,conf -P js_files $url
+done < live.txt
+
+# Step 6: Vulnerability scanning
+echo "[*] Scanning with Nuclei..."
+nuclei -l live.txt -o nuclei_output.txt
+
+echo "[✓] Recon complete. Results saved to:"
+echo "  - Subdomains: subdomains.txt"
+echo "  - Resolved IPs: resolved.txt"
+echo "  - Live hosts: live.txt"
+echo "  - Open ports: ports.txt"
+echo "  - Nuclei: nuclei_output.txt"
