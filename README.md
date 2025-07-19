@@ -27,6 +27,15 @@ go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
 go install -v github.com/projectdiscovery/naabu/v2/cmd/naabu@latest
 go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
 
+📦 Installation
+git clone https://github.com/yourusername/BugSight.git
+cd BugSight
+chmod +x bugsight.sh
+🚨 Usage
+./bugsight.sh <target-domain>
+🚨 Example
+./bugsight.sh example.com
+
 ██████╗  █████╗ ██╗  ██╗███╗   ███╗███████╗██████╗
 ██╔══██╗██╔══██╗██║ ██╔╝████╗ ████║██╔════╝██╔══██╗
 ██████╔╝███████║█████╔╝ ██╔████╔██║█████╗  ██████╔╝
