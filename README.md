@@ -18,6 +18,8 @@ A powerful reconnaissance automation tool for bug bounty hunters. PAKMEP-Bugsigh
 
 Ensure the following tools are installed and added to your `$PATH`:
 
+sudo apt install wget -y(to install golang)
+
 ```bash
 go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 go install -v github.com/projectdiscovery/dnsx/cmd/dnsx@latest
@@ -32,3 +34,9 @@ go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
 ██║     ██║  ██║██║  ██╗██║ ╚═╝ ██║███████╗██║    
 ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝    
 👁  BugSight by KyberPhilos
+
+🔐 Disclaimer
+This tool is for educational and authorized testing only. Misuse of this tool for unauthorized attacks is illegal.
+✨ Author
+Aakash Suresh
+Linkedin:https://www.linkedin.com/in/aakash-suresh-a930aa295/
