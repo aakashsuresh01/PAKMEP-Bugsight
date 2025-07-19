@@ -31,9 +31,11 @@ go install -v github.com/projectdiscovery/nuclei/v2/cmd/nuclei@latest
 git clone https://github.com/yourusername/BugSight.git
 cd BugSight
 chmod +x bugsight.sh
-🚨 Usage
+
+*)Usage
 ./bugsight.sh <target-domain>
-🚨 Example
+
+*)Example
 ./bugsight.sh example.com
 
 ██████╗  █████╗ ██╗  ██╗███╗   ███╗███████╗██████╗
